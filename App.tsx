@@ -11,93 +11,51 @@ import {
 } from 'react-native';
 
 const App = () => {
-  const theme = useColorScheme();
-  const isDarkMode = theme === 'dark';
-
   return (
-    <SafeAreaView
-      style={[
-        styles.container,
-        isDarkMode ? styles.darkContainer : styles.lightContainer,
-      ]}>
-      <Text
-        style={[
-          styles.heading,
-          isDarkMode ? styles.darkText : styles.lightText,
-        ]}>
-        Welcome to My App
-      </Text>
-      <Image
-        style={styles.image}
-        source={{
-          uri: 'https://images.pexels.com/photos/16470858/pexels-photo-16470858/free-photo-of-girls-in-apartment-windows.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-        }}
-      />
-      <Pressable
-        style={[
-          styles.button,
-          isDarkMode ? styles.darkButton : styles.lightButton,
-        ]}
-        onPress={() => Alert.alert('Pressed!')}>
-        <Text style={styles.buttonText}>Press Me</Text>
-      </Pressable>
+    // SafeAreaView ensures the UI is displayed within the safe boundaries of the device
+    <SafeAreaView style={styles.container}>
+      {/* Three boxes with different flex values */}
+      <View style={styles.box1} />
+      <View style={styles.box2} />
+      <View style={styles.box3} />
     </SafeAreaView>
   );
 };
 
+export default App;
+
+// total flex = 3 + 2 + 1 = 6
+// box1 takes up 3 parts of the total 6 flex, box2 takes 2 parts, and box3 takes 1 part.
+// So, the widths will be split like this:
+// box1: 3/6 = 50% of the width
+// box2: 2/6 = 30% of the width
+// box3: 1/6 = 20% of the width
+
 const styles = StyleSheet.create({
   container: {
+    // flex: 1 takes up the entire available space
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+    // background color of the entire container is black
+    backgroundColor: 'black',
+    // flexDirection: 'row' arranges the children (boxes) horizontally (side-by-side)
+    flexDirection: 'row',
   },
-  lightContainer: {
-    backgroundColor: '#D3D3D3',
+  box1: {
+    // flex: 3 means box1 will take 3 parts of the total available space
+    flex: 3,
+    // background color of box1 is orange
+    backgroundColor: 'orange',
   },
-  darkContainer: {
-    backgroundColor: '#333',
+  box2: {
+    // flex: 2 means box2 will take 2 parts of the total available space
+    flex: 2,
+    // background color of box2 is white
+    backgroundColor: 'white',
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  lightText: {
-    color: '#333',
-  },
-  darkText: {
-    color: '#FFF',
-  },
-  image: {
-    width: 300,
-    height: 200,
-    borderRadius: 15,
-    marginBottom: 20,
-    resizeMode: 'cover',
-  },
-  button: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    elevation: 5, // Adds shadow for Android
-    shadowColor: '#000', // iOS shadow effect
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-  },
-  lightButton: {
-    backgroundColor: '#3498db',
-  },
-  darkButton: {
-    backgroundColor: '#1e2a47',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
+  box3: {
+    // flex: 1 means box3 will take 1 part of the total available space
+    flex: 1,
+    // background color of box3 is green
+    backgroundColor: 'green',
   },
 });
-
-export default App;
